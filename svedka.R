@@ -48,6 +48,11 @@ xlab = "value of sales",
   col=I("blue"))
  
 
+hist(df$TotalSales, breaks = 10, 
+     main = "Histogram of Total sales",
+     xlab = "Sales", col="Blue", border = "red")
+
+
 #  ---------------------------------------------------------------------------
 #  2 - Run a regression of the natural logarithm of total sales on the the following variables: 
 #  price, print marketing expenditure, outdoor marketing expenditure, broadcast marketing expenditure, 
