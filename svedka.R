@@ -73,7 +73,7 @@ summary(fit)
 #  Comment on the comparison of your two models at this point in the analysis..
 #  --------------------------------------------------------------------------- 
 
-fit <- lm(LnSales ~ LnPrice +
+fit <- lm(LnSales - LnLSales~ LnPrice +
             LnPrint +
             LnOut + 
             LnBroad +
@@ -160,11 +160,11 @@ Tier2 <- ag2[which(ag2$Tier==1 & Tier$Year),]
 Tier2$Tier <- NULL
 
 
-fmt_dcimals <- function(decimals=0){
+#fmt_dcimals <- function(decimals=0){
   # return a function responpsible for formatting the 
   # axis labels with a given number of decimals 
-  function(x) as.character(round(x,decimals))
-}
+ # function(x) as.character(round(x,decimals))
+#}
 
 
 
