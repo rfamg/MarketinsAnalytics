@@ -1,7 +1,7 @@
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
 #  SVEDKA
-#  Written by Rafael Guimaraes
+#  Written by Rafael Guimaraes, Brian Kangogo and Nicholas Matthew
 #  Date April 8th 2017
 #  Version 1.0
 #  ---------------------------------------------------------------------------
@@ -60,15 +60,15 @@ hist(df$TotalSales, breaks = 10,
 #  for the dependent variable. Comment on the relative influence of the five variables on sales.
 #  --------------------------------------------------------------------------- 
 
-corrplot(cv, method= "ellipse", type="lower")
 
-fit <- lm(LnSales ~ PriceRerUnit+
+
+fit1 <- lm(LnSales ~ PriceRerUnit+
                     Print +
                     Outdoor + 
                     Broad +
                     LagTotalSales, data = df)
 
-summary(fit)
+summary(fit1)
 
 
 #  ---------------------------------------------------------------------------
@@ -78,13 +78,12 @@ summary(fit)
 #  Comment on the comparison of your two models at this point in the analysis..
 #  --------------------------------------------------------------------------- 
 
-fit <- lm(LnSales - LnLSales~ LnPrice +
-            LnPrint +
-            LnOut + 
-            LnBroad +
-            LagTotalSales, data = df)
-
-summary(fit)
+  fit2 <- lm(LnSales - LnLSales~ LnPrice +
+              LnPrint +
+              LnOut + 
+              LnBroad, data = df)
+  
+  summary(fit2)
 
 
 #  ---------------------------------------------------------------------------
@@ -94,7 +93,7 @@ summary(fit)
 #  2.  How does quality influence sales?
 #  --------------------------------------------------------------------------- 
 
-fit <- lm(LnSales ~ PriceRerUnit+
+fit3 <- lm(LnSales ~ PriceRerUnit+
             Print +
             Outdoor + 
             Broad +
@@ -102,7 +101,7 @@ fit <- lm(LnSales ~ PriceRerUnit+
             Tier1 +
             Tier2, data = df)
 
-summary(fit)
+summary(fit3)
 
 #  ---------------------------------------------------------------------------
 #  5 - To understand the influence of competition and brand power, expand your model again and run a 
@@ -111,14 +110,13 @@ summary(fit)
 #  --------------------------------------------------------------------------- 
 
 
-fit <- lm(LnSales ~ LnPrice +
+fit4 <- lm(LnSales - LnLSales ~ LnPrice +
             LnPrint +
             LnOut + 
             LnBroad +
-            LagTotalSales +
             LagTotalMinusSales, data = df)
 
-summary(fit)
+summary(fit4)
 
 #  ---------------------------------------------------------------------------
 #  6 - To measure the sales growth of new brands compared to the existent ones, include the 
@@ -127,7 +125,7 @@ summary(fit)
 #  How does it help to include this variable in the model?
 #  --------------------------------------------------------------------------- 
 
-fit <- lm(LnSales ~ PriceRerUnit+
+fit5 <- lm(LnSales ~ PriceRerUnit+
             Print +
             Outdoor + 
             Broad +
@@ -136,8 +134,17 @@ fit <- lm(LnSales ~ PriceRerUnit+
             Tier2 +
             Firstintro, data = df)
 
-summary(fit)
+summary(fit5)
 
+
+#  ---------------------------------------------------------------------------
+#  Comparing Coefficients
+#  ---------------------------------------------------------------------------
+
+coef(fit2)
+coef(fit3)
+coef(fit4)
+coef(fit5)
 
 #  ---------------------------------------------------------------------------
 #  8 -Create a time-series plot with two lines on it:  total industry sales units for Tier 1 brands 
